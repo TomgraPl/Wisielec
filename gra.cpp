@@ -32,7 +32,7 @@ void szubienica(int bledy)
 	case 5:
 		std::cout<<"=====\n|   |\n|   O\n|\n|\n|\n========="<<std::endl;
 		break;
-	case 6:
+	case 6
 		std::cout<<"=====\n|   |\n|   O\n|   |\n|   |\n|\n========="<<std::endl;
 		break;
 	case 7:
