@@ -32,7 +32,7 @@ void szubienica(int bledy)
 	case 5:
 		std::cout<<"=====\n|   |\n|   O\n|\n|\n|\n========="<<std::endl;
 		break;
-		case 6:
+	case 6:
 		std::cout<<"=====\n|   |\n|   O\n|   |\n|   |\n|\n========="<<std::endl;
 		break;
 	case 7:
@@ -80,7 +80,8 @@ int main()
 		hasla.push_back(wyraz);
 		place++;
 	}
-	
+	plik.close();
+
 	//losowanie hasła
 	srand(time(NULL));
 	int i=rand()%place;
