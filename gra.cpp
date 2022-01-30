@@ -6,6 +6,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <string>
+#include <fstream>
+#include <vector>
 //#include <locale.h> - biblioteka niezbędna do wprowadzenia języka polskiego
 //szubienice
 void szubienica(int bledy)
@@ -50,42 +52,38 @@ void szubienica(int bledy)
 
 int main()
 {
-	//SET(LC_ALL, "Polish") - na wpół gotowa klasa do ustawienia języka polskiego (nie pamiętam dokładnej klasy)
 	//zmienne
 	std::string litery[28]; //alfabet
 	size_t test; //długość hasła
-	int bledy=0; //ilość błedów
+	int bledy=0; //ilość błędów
 	int proby=0; //ilość prób
 	std::string litera; //wpisywana litera
 	std::string wynik; //stan odgadywanego hasła
-	size_t gruby; //długość podawanej litery - można wprowadzić od razu cały wyraz
+	size_t gruby; //długość podawanej litery - można wprowadzić od razu całe hasło
 	
 	//hasła
-	std::string hasla[20];
-	hasla[0]="ryba";
-	hasla[1]="papier";
-	hasla[2]="kleszcz";
-	hasla[3]="internet";
-	hasla[4]="pomocnik";
-	hasla[5]="zeszyt";
-	hasla[6]="czytnik";
-	hasla[7]="pojemnik";
-	hasla[8]="kot";
-	hasla[9]="nauczyciel";
-	hasla[10]="dzbanek";
-	hasla[11]="woda";
-	hasla[12]="kaloryfer";
-	hasla[13]="piernik";
-	hasla[14]="kurtka";
-	hasla[15]="donica";
-	hasla[16]="biurko";
-	hasla[17]="deszcz";
-	hasla[18]="dywan";
-	hasla[19]="karabin";
+	std::string wyraz;
+	std::vector<std::string> hasla;
+	std::ifstream plik;
+	plik.open("hasla.txt");
+	if(!plik.good())
+	{
+		std::cout<<"Blad otwierania pliku!"<<std::endl;
+		return 0;
+	}
+	else
+		std::cout<<"Pomyslnie otwarto plik!"<<std::endl;
+	int place;
+	while(!plik.eof())
+	{
+		plik>>wyraz;
+		hasla.push_back(wyraz);
+		place++;
+	}
 	
 	//losowanie hasła
 	srand(time(NULL));
-	int i=rand()%20;
+	int i=rand()%place;
 	std::string haslo=hasla[i];
 	
 	//drukowanie długości hasła
@@ -111,7 +109,7 @@ int main()
 		litery[proby]=litera;
 		gruby=litery[proby].size();
 	
-	//właściwa część
+	//sprawdzanie litery
 		test=haslo.find(litery[proby]);
 		if(test==std::string::npos)
 			bledy++;
